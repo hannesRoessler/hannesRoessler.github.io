@@ -21,6 +21,10 @@
       src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
 
+    <!-- Flowbite -->
+    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+
+
   </head>
   <body
     x-data="{
@@ -28,15 +32,23 @@
         companyName: $persist(''),
         projectShorthand: $persist(''),
         ticketId: '',
-        url() {
+        ticketUrl() {
             return this.companyName + '.atlassian.net/browse/' + this.projectShorthand.toUpperCase() + '-' + this.ticketId
         },
-        openJira() {
+        backlogUrl() {
+          return this.companyName + '.atlassian.net/browse/' + this.projectShorthand.toUpperCase()
+      },
+        openJiraTicket() {
             this.open = false
-            setTimeout(() => {location.href = 'http://' + this.url()}, 200)
+            setTimeout(() => {location.href = 'http://' + this.ticketUrl()}, 200)
         },
+        openJiraProject() {
+          this.open = false
+          setTimeout(() => {location.href = 'http://' + this.backlogUrl()}, 200)
+      },
         }"
-    @keyup.enter="openJira();"
+    @keyup.enter="openJiraTicket();"
+    @keydown.meta.enter="openJiraProject()"
     class="overflow-hidden"
   >
     <div
@@ -70,6 +82,8 @@
                 x-model="companyName"
                 x-ref="companyNameInputField"
                 spellcheck="false"
+                data-tooltip-target="tooltip-bottom"
+                data-tooltip-placement="bottom"
                 autofocus
               />
             </div>
@@ -96,9 +110,9 @@
           </div>
           <div
             class="p-6 m-2 border-4 border-black rounded-xl shadow-offset shadow-black text-center border-dashed cursor-pointer hover:bg-slate-50"
-            @click="openJira()"
+            @click="openJiraTicket()"
           >
-        <span x-text="url()"></span>
+        <span x-text="ticketUrl()"></span>
         <span class="pl-1">(⏎)</span>
         </div>
         </div>
