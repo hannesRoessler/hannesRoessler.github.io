@@ -33,19 +33,12 @@
         projectShorthand: $persist(''),
         ticketId: '',
         ticketUrl() {
-            return this.companyName + '.atlassian.net/browse/' + this.projectShorthand.toUpperCase() + '-' + this.ticketId
+            return this.companyName + '.atlassian.net/browse/' + this.projectShorthand.toUpperCase() + (this.ticketId ? '-' + this.ticketId : '')
         },
-        backlogUrl() {
-          return this.companyName + '.atlassian.net/browse/' + this.projectShorthand.toUpperCase()
-      },
         openJiraTicket() {
             this.open = false
             setTimeout(() => {location.href = 'http://' + this.ticketUrl()}, 200)
         },
-        openJiraProject() {
-          this.open = false
-          setTimeout(() => {location.href = 'http://' + this.backlogUrl()}, 200)
-      },
         }"
     @keyup.enter="openJiraTicket();"
     @keydown.meta.enter="openJiraProject()"
