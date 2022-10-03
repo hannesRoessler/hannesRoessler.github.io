@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-JXX551Z94L"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-JXX551Z94L");
+    </script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='white' class='w-6 h-6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z' /%3E%3C/svg%3E%0A" type="image/svg+xml" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='white' class='w-6 h-6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z' /%3E%3C/svg%3E%0A"
+      type="image/svg+xml"
+    />
     <title>JIRA Ticket Launcher</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,8 +41,6 @@
 
     <!-- Flowbite -->
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
-
-
   </head>
   <body
     x-data="{
@@ -105,27 +121,26 @@
             class="p-6 m-2 border-4 border-black rounded-xl shadow-offset shadow-black text-center border-dashed cursor-pointer hover:bg-slate-50"
             @click="openJiraTicket()"
           >
-        <span x-text="ticketUrl()"></span>
-        <span class="pl-1">(⏎)</span>
-        </div>
+            <span x-text="ticketUrl()"></span>
+            <span class="pl-1">(⏎)</span>
+          </div>
         </div>
       </div>
     </div>
-    <div 
-        class="flex absolute justify-center bottom-0 left-0 right-0 mr-auto ml-auto w-1/2 text-sm p-1 text-slate-400"
-        x-show="open"
-        x-cloak
-        x-transition.opacity
-        >
-        <a href="http://buymeacoffee.com/hannes.roessler"
-          target="_blank"
-          class="m-2 hover:underline"
-          tabindex="-1"
-          >Buy me a ☕️</a>
-        <a href=""
-          class="m-2 hover:underline"
-          tabindex="-1"
-          >Disclaimer</a>
+    <div
+      class="flex absolute justify-center bottom-0 left-0 right-0 mr-auto ml-auto w-1/2 text-sm p-1 text-slate-400"
+      x-show="open"
+      x-cloak
+      x-transition.opacity
+    >
+      <a
+        href="http://buymeacoffee.com/hannes.roessler"
+        target="_blank"
+        class="m-2 hover:underline"
+        tabindex="-1"
+        >Buy me a ☕️</a
+      >
+      <a href="" class="m-2 hover:underline" tabindex="-1">Disclaimer</a>
     </div>
   </body>
 </html>
