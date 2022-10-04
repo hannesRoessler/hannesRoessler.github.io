@@ -57,21 +57,11 @@
             this.open = false
             setTimeout(() => {location.href = 'http://' + this.ticketUrl()}, 200)
         },
-        inputIndex: 0,
-        incrementInputIndex() {
-          if (this.inputIndex < 3) this.inputIndex++
-          else this.inputIndex = 0
-          console.log(this.inputIndex)
-        },
-        decrementInputIndex() {
-          if (this.inputIndex > 0) this.inputIndex--
-          else this.inputIndex = 3
-          console.log(this.inputIndex)
-        }
         }"
     @keyup.enter="openJiraTicket();"
-    class="overflow-hidden"
     x-init="(companyName && projectShorthand) ? $refs.ticketId.focus() : $refs.companyName.focus()"
+    @pageshow.window="open = true"
+    class="overflow-hidden"
   >
     <div
       class="flex flex-row min-h-screen justify-center items-center"
