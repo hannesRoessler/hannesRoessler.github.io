@@ -33,14 +33,16 @@
       src="https://unpkg.com/@alpinejs/persist@3.x.x/dist/cdn.min.js"
     ></script>
 
+    <script
+      defer
+      src="https://unpkg.com/@alpinejs/focus@3.x.x/dist/cdn.min.js"
+    ></script>
+
     <!-- Alpine Core -->
     <script
       defer
       src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
-
-    <!-- Flowbite -->
-    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
   </head>
   <body
     x-data="{
@@ -55,10 +57,21 @@
             this.open = false
             setTimeout(() => {location.href = 'http://' + this.ticketUrl()}, 200)
         },
+        inputIndex: 0,
+        incrementInputIndex() {
+          if (this.inputIndex < 3) this.inputIndex++
+          else this.inputIndex = 0
+          console.log(this.inputIndex)
+        },
+        decrementInputIndex() {
+          if (this.inputIndex > 0) this.inputIndex--
+          else this.inputIndex = 3
+          console.log(this.inputIndex)
+        }
         }"
     @keyup.enter="openJiraTicket();"
-    @keydown.meta.enter="openJiraProject()"
     class="overflow-hidden"
+    x-init="(companyName && projectShorthand) ? $refs.ticketId.focus() : $refs.companyName.focus()"
   >
     <div
       class="flex flex-row min-h-screen justify-center items-center"
@@ -81,7 +94,11 @@
         </div>
 
         <div id="app">
-          <div class="flex flex-row mt-6 flex-wrap justify-center">
+          <div 
+            class="flex flex-row mt-6 flex-wrap justify-center"
+            @keydown.shift.right="$focus.next()"
+            @keydown.shift.left="$focus.previous()"
+          >
             <div
               class="p-6 m-2 border-4 border-black rounded-xl shadow-offset shadow-black"
             >
@@ -89,11 +106,10 @@
                 type="text"
                 class="w-full p-3 border-2 border-black rounded-lg"
                 x-model="companyName"
-                x-ref="companyNameInputField"
+                x-ref="companyName"
                 spellcheck="false"
                 data-tooltip-target="tooltip-bottom"
                 data-tooltip-placement="bottom"
-                autofocus
               />
             </div>
             <div
@@ -103,6 +119,7 @@
                 type="text"
                 class="w-full p-3 border-2 border-black rounded-lg uppercase"
                 x-model="projectShorthand"
+                x-ref="projectShorthand"
                 spellcheck="false"
               />
             </div>
@@ -113,6 +130,7 @@
                 type="number"
                 class="w-full p-3 border-2 border-black rounded-lg outline-none appearance-none"
                 x-model="ticketId"
+                x-ref="ticketId"
                 @pageshow.window="$el.value = ''"
               />
             </div>
