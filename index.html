@@ -46,7 +46,6 @@
   </head>
   <body
     x-data="{
-        open: true,
         companyName: $persist(''),
         projectShorthand: $persist(''),
         ticketId: '',
@@ -54,18 +53,15 @@
             return this.companyName + '.atlassian.net/browse/' + this.projectShorthand.toUpperCase() + (this.ticketId ? '-' + this.ticketId : '')
         },
         openJiraTicket() {
-            this.open = false
-            setTimeout(() => {location.href = 'http://' + this.ticketUrl()}, 200)
+            setTimeout(() => {window.open('http://' + this.ticketUrl(), '_blank')}, 200)
         },
         }"
-    @keyup.enter="openJiraTicket();"
+    @keyup.enter="openJiraTicket(); $refs.ticketId.select() "
     x-init="(companyName && projectShorthand) ? $refs.ticketId.focus() : $refs.companyName.focus()"
-    @pageshow.window="open = true"
     class="overflow-hidden"
   >
     <div
       class="flex flex-row min-h-screen justify-center items-center"
-      x-show="open"
       x-cloak
       x-transition.duration.200ms
     >
@@ -137,7 +133,6 @@
     </div>
     <div
       class="flex absolute justify-center bottom-0 left-0 right-0 mr-auto ml-auto w-1/2 text-sm p-1 text-slate-400"
-      x-show="open"
       x-cloak
       x-transition.opacity
     >
