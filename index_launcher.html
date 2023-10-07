@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AMBOSS Launcher</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Style for the entire window */
+      body {
+        margin: 0;
+        flex-direction: column; /* Changed from row to column */
+        align-items: center; /* Align items center will center them horizontally */
+        justify-content: center; /* Added for vertical centering */
+        overflow: hidden;
+        height: 100vh; /* Added 100vh to take full viewport height */
+        -webkit-app-region: drag;
+      }
+      .logo {
+        width: 64px; /* Adjust the width of your logo */
+        height: auto;
+        margin: 8px;
+        cursor: grab;
+      }
+      .main-container {
+        width: 85%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .search-container {
+        padding-left: 8px;
+        padding-right: 8px;
+        border: 1px solid #a3b2bd;
+        border-radius: 8px;
+        display: flex;
+        align-items: center; /* Vertically align the items */
+        width: 85%;
+        -webkit-app-region: no-drag; /* Ensure container isn't draggable */
+      }
+      .search-icon,
+      .close-icon {
+        cursor: pointer; /* Make icons clickable */
+        height: 16px; /* Set the height of the icons */
+        width: 16px; /* Set the width of the icons */
+        color: #607585;
+      }
+      #search-bar {
+        border: 0px;
+        width: 90%;
+        padding: 5px;
+        height: 32px;
+        font-family: "Lato";
+        font-weight: 900;
+        -webkit-app-region: no-drag; /* Added to ensure search bar isn't draggable */
+      }
+      #search-bar:focus {
+        outline: none;
+        border: none; /* Sometimes, the border may also change on focus, so you might want to reset that as well */
+      }
+      #close-btn {
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        -webkit-app-region: no-drag;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <img src="favicon.ico" alt="AMBOSS Logo" class="logo" />
+      <div class="search-container">
+        <img src="search_icon.svg" alt="Search Icon" class="search-icon" />
+        <input
+          type="text"
+          id="search-bar"
+          placeholder="AMBOSS durchsuchen..."
+        />
+      </div>
+    </div>
+    <span id="close-btn" onclick="window.close();"
+      ><img src="close_icon.svg" />
+    </span>
+    <script src="render.js"></script>
+  </body>
+</html>
